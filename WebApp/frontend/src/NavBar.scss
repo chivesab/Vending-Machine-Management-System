@@ -1,0 +1,30 @@
+@import 'app';
+
+.nav-logo-and-links {
+  display: flex;
+
+  .navigation-links {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.navigation-item {
+  padding: 8px;
+  margin-left: 16px;
+  text-decoration: none;
+  color: black;
+  align-self: center;
+  font-size: 24px;
+
+  &:hover {
+    background-color: $gray-3;
+  }
+}
+
+.main-page {
+  padding: 24px 100px 0;
+  height: 100%;
+  width: 100%;
+}

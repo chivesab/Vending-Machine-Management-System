@@ -1,0 +1,57 @@
+.update-stock-modal {
+  min-width:800px;
+
+  .stock-modal-tab {
+    width: 100%;
+  }
+
+  .stock-modal-body {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+  }
+
+  .strategy-option-input {
+    text-transform: uppercase;
+
+    input {
+      margin-right: 8px;
+    }
+  }
+
+  .ml-model-display {
+    width: 100%;
+  }
+
+  .strategy-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 2px;
+    margin-bottom: 16px;
+
+    .stock-update-revenue-decrease {
+      color: red;
+    }
+
+    .stock-update-revenue-increase {
+      color: green;
+    }
+
+    .strategy-option-text {
+      padding: 8px;
+    }
+  }
+
+  .machine-item-stock-column {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    input {
+      width: 50%;
+    }
+  }
+}
