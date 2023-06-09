@@ -1,2 +1,4 @@
-# Master Project for Yuche Lin, San Jose State University
+# Master Project for Yuche Lin
+
+San Jose State University
 
