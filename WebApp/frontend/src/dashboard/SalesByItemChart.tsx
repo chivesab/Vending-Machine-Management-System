@@ -1,18 +1,23 @@
 import * as React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 import * as _ from 'lodash';
 
 import { SupplierTypes } from '../../../shared/SupplierTypes';
 
 import './SalesChart.scss';
 
-
 interface Props {
   items: SupplierTypes.Sales['items'];
 }
-
-
-
 
 export const SalesByItemChart: React.FC<Props> = ({ items }) => {
   const sortedItems = _.sortBy(items, ({ sales }) => sales).reverse();
@@ -31,8 +36,8 @@ export const SalesByItemChart: React.FC<Props> = ({ items }) => {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3"  className="chartGrid"/>
-          <XAxis dataKey="name" tick={false}/>
+          <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
+          <XAxis dataKey="name" tick={false} />
           <YAxis />
           <Tooltip />
           <Legend />
@@ -41,7 +46,10 @@ export const SalesByItemChart: React.FC<Props> = ({ items }) => {
         </BarChart>
       </ResponsiveContainer>
     </div>
-  )
-}
+  );
+};
 
-const generateRandomColorCode = () => Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+const generateRandomColorCode = () =>
+  Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, '0');

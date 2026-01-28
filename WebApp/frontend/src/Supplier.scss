@@ -60,7 +60,7 @@
   .form-inner {
     position: relative;
     display: block;
-    background-color: #FFF;
+    background-color: #fff;
     padding: 30px;
     z-index: 2;
 
@@ -88,7 +88,7 @@
         display: block;
         width: 100%;
         padding: 10px 15px;
-        background-color: #F8F8F8;
+        background-color: #f8f8f8;
         border-radius: 8px;
         transition: 0.4s;
 
@@ -111,22 +111,26 @@
   }
 }
 
-
 .welcome {
   width: 100%;
   max-width: 480px;
-  background-color: #FFF;
+  background-color: #fff;
   padding: 15px 30px;
 
   button {
     display: inline-block;
     padding: 10px 15px;
     border-radius: 8px;
-    background-image: linear-gradient(to right, #FFCE00 50%, #FFCE00 50%, #FE4880);
+    background-image: linear-gradient(
+      to right,
+      #ffce00 50%,
+      #ffce00 50%,
+      #fe4880
+    );
     background-size: 200%;
     background-position: 0%;
     transition: 0.4s;
-    color: #FFF;
+    color: #fff;
     font-weight: 700;
     cursor: pointer;
   }
@@ -138,9 +142,8 @@
     margin-bottom: 30px;
 
     span {
-      color: #FE4880;
+      color: #fe4880;
       font-weight: 700;
-
     }
   }
 }

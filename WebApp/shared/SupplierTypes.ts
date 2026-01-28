@@ -40,7 +40,10 @@ export namespace SupplierTypes {
   export const ML_MODELS = ['linear', 'log', 'lstm'];
   export type MLModel = 'linear' | 'log' | 'lstm';
   // machineId -> ModelName -> Strategy -> itemId -> quantity
-  export type Strategies = Record<string, Record<string, Record<Strategy, Record<string, number>>>>
+  export type Strategies = Record<
+    string,
+    Record<string, Record<Strategy, Record<string, number>>>
+  >;
 
   export interface MachineGroup {
     machines: Machine[];
@@ -88,12 +91,10 @@ export namespace SupplierTypes {
     transactionSize: {
       size: number;
       count: number;
-    }[]
+    }[];
   }
 }
 
-export namespace BackendTypes {
-
-}
+export namespace BackendTypes {}
 
 export const DEFAULT_SALT_ROUNDS = 10;

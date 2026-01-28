@@ -9,8 +9,9 @@ import constants from './config/config.json';
 axios.defaults.baseURL = constants.apiBaseURL;
 axios.defaults.withCredentials = true;
 
-ReactDOM.hydrate((
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  ), document.getElementById('root')); 
+ReactDOM.hydrate(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById('root')
+);

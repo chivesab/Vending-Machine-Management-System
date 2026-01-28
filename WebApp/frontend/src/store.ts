@@ -1,13 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-
 import { SupplierTypes } from '../../shared/SupplierTypes';
 import { machineReducer } from './reducer/machine';
 
-
-
 export const store = configureStore({
-  reducer: machineReducer
+  reducer: machineReducer,
 });
 
 export interface SupplierState {
@@ -17,12 +14,11 @@ export interface SupplierState {
   strategies: SupplierTypes.Strategies;
 }
 
-
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,
   unknown,
-  Action<string> 
+  Action<string>
 >;

@@ -1,10 +1,10 @@
 export namespace VendingTypes {
   export interface Item {
-    id: string,
-    name: string,
-    price: number,
-    count?: number,
-    quantity?: number,
+    id: string;
+    name: string;
+    price: number;
+    count?: number;
+    quantity?: number;
   }
 
   export interface Machine {

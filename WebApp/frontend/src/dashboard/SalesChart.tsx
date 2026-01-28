@@ -7,7 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from 'recharts';
 import * as _ from 'lodash';
 import { useSelector } from 'react-redux';
@@ -22,31 +22,37 @@ interface Props {
 }
 
 export const SalesChart: React.FC<Props> = ({ daily, showLegend }) => {
-  const machines = useSelector<any, SupplierTypes.Machine[]>(({ machines }) => machines);
+  const machines = useSelector<any, SupplierTypes.Machine[]>(
+    ({ machines }) => machines
+  );
 
-  const transformedDaily: any[] = _.sortBy(daily.map((daily) => ({
-    date: daily.date,
-    ...Object.fromEntries(daily.machines.map((machine) => [machine.machineId, machine.sales]))
-  })), ({date}) => new Date(date));
+  const transformedDaily: any[] = _.sortBy(
+    daily.map((daily) => ({
+      date: daily.date,
+      ...Object.fromEntries(
+        daily.machines.map((machine) => [machine.machineId, machine.sales])
+      ),
+    })),
+    ({ date }) => new Date(date)
+  );
 
-  const allMachineKeys = 
-    Object.fromEntries(Array.from(
+  const allMachineKeys = Object.fromEntries(
+    Array.from(
       new Set(
-        daily.flatMap(({machines}) => machines.map(({machineId}) => machineId)
+        daily.flatMap(({ machines }) =>
+          machines.map(({ machineId }) => machineId)
         )
       )
     ).map((key) => {
-      const m = machines.find(({id})=> id === key);
+      const m = machines.find(({ id }) => id === key);
       if (!m) {
-        throw new Error("Oh no");
+        throw new Error('Oh no');
       }
-      const { id, city}  =m;
+      const { id, city } = m;
 
-      return [
-        id,
-        city
-      ]
-    }));
+      return [id, city];
+    })
+  );
 
   return (
     <div className="machine-daily-sales">
@@ -62,28 +68,28 @@ export const SalesChart: React.FC<Props> = ({ daily, showLegend }) => {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3"  className="chartGrid"/>
+          <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
           <XAxis dataKey="date" />
           <YAxis />
           <Tooltip />
-          { showLegend && (
-            <Legend formatter={(key) => key}/>
-          )}
+          {showLegend && <Legend formatter={(key) => key} />}
           {Object.entries(allMachineKeys).map(([machineId, name]) => (
-            <Line 
-              key={machineId} 
-              type="monotone" 
+            <Line
+              key={machineId}
+              type="monotone"
               name={name}
-              dataKey={machineId} 
-              stroke={`#${generateRandomColorCode()}`} 
+              dataKey={machineId}
+              stroke={`#${generateRandomColorCode()}`}
               strokeWidth={2}
             />
-          ))
-          }
+          ))}
         </LineChart>
       </ResponsiveContainer>
     </div>
-  )
-}
+  );
+};
 
-const generateRandomColorCode = () =>  Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+const generateRandomColorCode = () =>
+  Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, '0');

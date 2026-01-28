@@ -10,7 +10,13 @@ type User = SupplierTypes.User;
 const DEFAULT_COMPANY_ID = 'c37c3316-1b7d-4345-a915-f94b9db9a8f5';
 
 class UserModel {
-  async addUser(email: string, password: string, name: string, companyId: string = DEFAULT_COMPANY_ID, role='user'): Promise<User | undefined> {
+  async addUser(
+    email: string,
+    password: string,
+    name: string,
+    companyId: string = DEFAULT_COMPANY_ID,
+    role = 'user'
+  ): Promise<User | undefined> {
     const conn = await connection;
     const newUserId = uuid.v4();
 
@@ -23,30 +29,34 @@ class UserModel {
 
   async getUser(id: string): Promise<User | undefined> {
     const conn = await connection;
-    const user = await conn.query(`SELECT id, email, name, role, company_id FROM owner WHERE id='${id}'`);
+    const user = await conn.query(
+      `SELECT id, email, name, role, company_id FROM owner WHERE id='${id}'`
+    );
     if (user.length === 0) {
       return undefined;
     }
     return {
       ...user[0],
-      companyId: user[0].company_id
+      companyId: user[0].company_id,
     };
   }
 
-  async authenticateUser(email: string, password: string): Promise<User | undefined> {
+  async authenticateUser(
+    email: string,
+    password: string
+  ): Promise<User | undefined> {
     const conn = await connection;
     const user = await conn.query(`
       SELECT id, email, password, name, role
       FROM owner 
-      WHERE email='${email}'`
-    );
+      WHERE email='${email}'`);
     if (user.length === 0) {
       return undefined;
     }
     const result = await bcrypt.compare(password, user[0].password);
-    console.log("Authenticate Result: ", result);
+    console.log('Authenticate Result: ', result);
     if (result) {
-      return _.omit(user[0], 'password') as any; 
+      return _.omit(user[0], 'password') as any;
     }
     return undefined;
   }
@@ -60,8 +70,8 @@ class UserModel {
 
 //   await connection.query(
 //     `CREATE TABLE IF NOT EXISTS owner(
-//       id varchar(255) primary key, 
-//       email varchar(255) not null,  
+//       id varchar(255) primary key,
+//       email varchar(255) not null,
 //       password varchar(255) not null,
 //       name varchar(255) not null,
 //       UNIQUE (email)
@@ -71,4 +81,4 @@ class UserModel {
 //   return connection;
 // }
 
-export const userModel = new UserModel()
+export const userModel = new UserModel();

@@ -17,5 +17,5 @@
     "strictNullChecks": true,
     "noImplicitAny": true,
     "experimentalDecorators": true
-  },
+  }
 }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as bcrypt from "bcryptjs";
+import * as bcrypt from 'bcryptjs';
 import * as React from 'react';
 
 import { LoadingAnimation } from './components/LoadingAnimation';
@@ -13,8 +13,8 @@ interface Auth {
 }
 
 export interface LoginInfo {
-  email: string,
-  password: string
+  email: string;
+  password: string;
 }
 
 interface AuthContext {
@@ -26,9 +26,11 @@ interface AuthContext {
 
 const authContext = React.createContext<AuthContext>({
   authed: false,
-  login: async () => { return false},
+  login: async () => {
+    return false;
+  },
   logout: async () => {},
-  checkAuthenticated: async () => {}
+  checkAuthenticated: async () => {},
 });
 
 function useAuth(): AuthContext {
@@ -36,15 +38,12 @@ function useAuth(): AuthContext {
 
   return {
     authed,
-    login: async ({email, password}) => {
+    login: async ({ email, password }) => {
       try {
-        const authenticateResult = await axios.post(
-          '/login',
-          {
-            email, 
-            password: hashPassword(password)
-          }
-        );
+        const authenticateResult = await axios.post('/login', {
+          email,
+          password: hashPassword(password),
+        });
         if (authenticateResult) {
           setAuthed(true);
           return true;
@@ -57,24 +56,22 @@ function useAuth(): AuthContext {
     },
     logout: async () => {
       console.log('setAuthed to false');
-      setAuthed(false); 
-      await axios.get(
-        '/logout'
-      )
+      setAuthed(false);
+      await axios.get('/logout');
     },
     checkAuthenticated: async () => {
-      console.log("checkAuthenticated");
+      console.log('checkAuthenticated');
       try {
         const authed = await axios.get('/authenticated');
         setAuthed(authed.status === 200);
       } catch (err) {
         setAuthed(false);
       }
-    }
+    },
   };
 }
 
-export const AuthProvider: React.FC= ({ children }) => {
+export const AuthProvider: React.FC = ({ children }) => {
   const auth = useAuth();
   const [authChecked, setAuthChecked] = React.useState(false);
 
@@ -90,15 +87,14 @@ export const AuthProvider: React.FC= ({ children }) => {
     }
 
     checkAuthed();
-  })
-
+  });
 
   return authChecked ? (
-    <authContext.Provider value={auth}>
-      {children}
-    </authContext.Provider>
-  ) : ( <LoadingAnimation/>);
-}
+    <authContext.Provider value={auth}>{children}</authContext.Provider>
+  ) : (
+    <LoadingAnimation />
+  );
+};
 
 export function AuthConsumer() {
   return React.useContext(authContext);

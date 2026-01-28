@@ -1,7 +1,7 @@
 // webpack.config.server.js
-const nodeExternals = require('webpack-node-externals')
-const path = require('path')
-const CopyPlugin = require('copy-webpack-plugin')
+const nodeExternals = require('webpack-node-externals');
+const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -33,19 +33,11 @@ module.exports = {
       },
       {
         test: /\.scss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
-        ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.css$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
-        ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -57,7 +49,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ context: 'backend', from: 'views', to: 'views' }],
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
   ],
   devServer: {
     historyApiFallback: true,
@@ -65,5 +57,5 @@ module.exports = {
     compress: true,
     hot: true,
     port: 3000,
-  }
-}
+  },
+};
